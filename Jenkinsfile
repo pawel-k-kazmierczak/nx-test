@@ -4,12 +4,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+               sh """ git checkout $BUILD_BRANCH
+                git pull
+                # npm install
+                # npx nx show projects --affected --base=origin/master
+                """
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
+        stage('Test'){
+          steps{
+            script {
+                doDynamicParallelSteps()
+            }
             }
         }
         stage('Deploy') {
@@ -18,4 +24,20 @@ pipeline {
             }
         }
     }
+}
+
+def doDynamicParallelSteps(){
+  tests = [:]
+  for (f in ['abc','efg','wks']) {
+
+    def var = "${f}"
+    tests[var] = {
+      node {
+        stage("test "+var) {
+          echo var
+        }
+      }
+    }
+  }
+  parallel tests
 }
