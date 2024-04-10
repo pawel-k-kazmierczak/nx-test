@@ -51,6 +51,15 @@ def doDynamicParallelSteps(affectedProjects){
     build[var] = {
       node {
         stage("build ${var}") {
+
+            def lsOutput = sh(script: 'ls', returnStdout: true).trim();
+
+            echo lsOutput
+
+            if(lsOutput==""){
+                sh """ git clone https://github.com/pawel-k-kazmierczak/nx-test/ ."""
+            }
+
             sh """ git checkout $BUILD_BRANCH
                 git pull
                 npm install
