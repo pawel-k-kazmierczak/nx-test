@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   template: `
     <!--
      * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     This is a starter component and can be deleted.
+     This is a starter component and can be deleted. (Sure!)
      * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      Delete this file and get started with your project!
      * * * * * * * * * * * * * * * * * * * * * * * * * * * *
