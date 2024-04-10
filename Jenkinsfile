@@ -19,7 +19,7 @@ pipeline {
             steps {
                sh """ git checkout $BUILD_BRANCH
                 git pull
-                npm ci
+                npm install
                 """
 
                 script {
@@ -53,7 +53,7 @@ def doDynamicParallelSteps(affectedProjects){
         stage("build ${var}") {
             sh """ git checkout $BUILD_BRANCH
                 git pull
-                npm ci
+                npm install
                 """
             pwd
             echo " npx nx build ${var}"
